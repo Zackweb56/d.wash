@@ -1,0 +1,3065 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D. WASH - Lavage Mobile à Domicile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0064cf;
+            --lime-green: #00FF00;
+            --dark-bg: #0a0a0a;
+            --light-gray: #f8f9fa;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --border-color: #eee;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue), var(--lime-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--lime-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #004ba8 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-content .highlight {
+            color: var(--lime-green);
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--lime-green), #00cc00);
+            color: var(--dark-bg);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.3);
+            animation: slideInLeft 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 255, 0, 0.4);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideInRight 1s ease-out 0.6s both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            right: 10%;
+            animation-delay: -2s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 5%;
+            animation-delay: -4s;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--light-gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--lime-green));
+            transition: left 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            left: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            color: var(--lime-green);
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Why Choose Us Section */
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .why-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--lime-green);
+        }
+
+        .why-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Vehicles Section Styling */
+        .vehicles {
+            background: var(--light-gray);
+            padding: 4rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: var(--light-text);
+            font-size: 1rem;
+        }
+        
+        /* Vehicle Selection Styles */
+        .vehicle-selection {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .vehicle-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            background: white;
+            border-radius: 10px;
+            width: 120px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .vehicle-option.active {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+        }
+        
+        .vehicle-option i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+        }
+        
+        .vehicle-option span {
+            font-weight: 600;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Packs Container */
+        .packs-container {
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .packs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            will-change: transform, opacity; /* Optimize for animations */
+        }
+
+        .pack-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .pack-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pack-card.popular {
+            border: 2px solid var(--lime-green);
+            position: relative;
+        }
+
+        .pack-card.popular::before {
+            content: 'Populaire';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: var(--lime-green);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        
+        .pack-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pack-header h3 {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            font-weight: 400;
+            margin-bottom: -0.2rem;
+        }
+        
+        .pack-header p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        .pack-price {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        #dh_mad{
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+        
+        .pack-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .pack-features li {
+            padding: 0.5rem 0;
+            color: var(--light-text);
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+        }
+        
+        .pack-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pack-button {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .pack-button:hover {
+            background: #0d8bf2;
+        }
+        
+        .pack-card.popular .pack-button {
+            background: var(--lime-green);
+        }
+        
+        .pack-card.popular .pack-button:hover {
+            background: #04bb0a;
+        }
+
+        /* How It Works Section */
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--lime-green));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-card:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: calc(100% - 40px);
+            width: 2rem;
+            height: 2px;
+            background: var(--lime-green);
+            z-index: 1;
+        }
+
+        .step-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--light-gray);
+        }
+
+        .gallery-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0, 100, 207, 0.8), rgba(0, 255, 0, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-slide:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-btn:hover {
+            background: var(--lime-green);
+            color: var(--dark-bg);
+        }
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 2rem;
+            font-size: 5rem;
+            color: var(--lime-green);
+            font-family: serif;
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--lime-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: var(--light-gray);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--light-gray);
+        }
+
+        .faq-question h3 {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .faq-icon {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            padding: 0 2rem 1.5rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: stretch;
+        }
+
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Contact Info Card */
+        .contact-info {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .contact-info-title {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--lime-green);
+            font-weight: 600;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--lime-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-details h4 {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .contact-details a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--lime-green);
+            text-decoration: underline;
+        }
+
+        .contact-subtext {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-top: 0.3rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+            padding-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Map Styling */
+        .map-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .map-container {
+            height: 100%;
+        }
+
+        .map-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .map-overlay i {
+            font-size: 1.5rem;
+            color: var(--lime-green);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue), var(--lime-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--lime-green);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--lime-green);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--lime-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Modal Enhancements */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            /* border-radius: 20px; */
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--lime-green));
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            /* border-radius: 20px 20px 0 0; */
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .steps-container {
+            padding: 2rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            height: 4px;
+            background: var(--light-gray);
+            width: 100%;
+            z-index: 1;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--lime-green);
+            transition: width 0.4s ease;
+            z-index: 2;
+        }
+
+        .step-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+            position: relative;
+            width: 25%;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .step-indicator.active .step-number {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .step-indicator.completed .step-number {
+            background: var(--lime-green);
+            color: var(--dark-bg);
+        }
+
+        /* Step Content */
+        .step-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .step-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+        }
+
+        /* Form Enhancements */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--light-gray);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(0, 100, 207, 0.2);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Buttons */
+        .step-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background: #d1d1d1;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-confirm {
+            background: var(--lime-green);
+            color: var(--dark-bg);
+        }
+
+        .btn-confirm:hover {
+            background: #00cc00;
+        }
+
+        /* Receipt Summary */
+        .receipt-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px dashed var(--border-color);
+        }
+
+        .receipt-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .receipt-logo i {
+            font-size: 1.5rem;
+        }
+
+        .receipt-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .receipt-number {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: var(--light-gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .receipt-body {
+            margin-bottom: 1rem;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .receipt-label {
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .receipt-value {
+            font-weight: 600;
+            color: var(--text-dark);
+            text-align: right;
+        }
+
+        .receipt-divider {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .receipt-divider:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-color);
+            z-index: -1;
+        }
+
+        .receipt-divider span {
+            background: white;
+            padding: 0 1rem;
+        }
+
+        .receipt-services {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .receipt-services li {
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .receipt-services li:before {
+            content: "•";
+            color: var(--lime-green);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .receipt-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-top: 1.5rem;
+        }
+
+        .receipt-amount {
+            font-size: 1.3rem;
+            color: var(--lime-green);
+        }
+
+        .receipt-notice {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .receipt-notice i {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+   
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: var(--transition);
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            background: #128C7E;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-height: 95vh;
+            }
+            
+            .progress-container {
+                margin-bottom: 2rem;
+            }
+            
+            .step-label {
+                display: none;
+            }
+            
+            .step-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+            
+            .step-title {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-control {
+                padding: 0.8rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .receipt-summary {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal {
+                padding: 10px;
+            }
+            
+            .modal-content {
+                border-radius: 15px;
+            }
+            
+            .modal-header {
+                padding: 1rem;
+            }
+            
+            .steps-container {
+                padding: 1.5rem;
+            }
+            
+            .step-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .receipt-container {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .why-us-grid,
+            .vehicles-grid,
+            .packs-grid,
+            .how-it-works-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vehicle-option {
+                width: 100px;
+                padding: 1rem 0.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .step-card:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container,
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/212123456789" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">D.WASH</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#vehicles">Véhicules</a></li>
+                <li><a href="#gallery">Galerie</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-element">💧</div>
+        <div class="floating-element">✨</div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>LAVAGE <span class="highlight">MOBILE</span><br>À DOMICILE</h1>
+                <p>Service professionnel de nettoyage automobile à domicile. Nous venons chez vous pour redonner à votre véhicule tout son éclat.</p>
+                <button class="cta-button" onclick="openModal()">
+                    <i class="fas fa-calendar-check"></i> Réserver Maintenant
+                </button>
+            </div>
+            <div class="hero-image">
+                <img src="hero_wash_car.png" alt="Car Wash Service">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos Services</h2>
+                <p>Des solutions complètes pour l'entretien de votre véhicule</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spray-can"></i>
+                    </div>
+                    <h3>Désinfection de l'habitacle</h3>
+                    <p>Nettoyage complet et désinfection de l'intérieur de votre véhicule pour votre sécurité.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3>Nettoyage des tapis</h3>
+                    <p>Aspiration et nettoyage en profondeur de tous les tapis et moquettes de votre voiture.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Lavage extérieur/intérieur</h3>
+                    <p>Service complet de lavage extérieur et intérieur pour une voiture impeccable.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-window-maximize"></i>
+                    </div>
+                    <h3>Nettoyage des vitres</h3>
+                    <p>Nettoyage professionnel de toutes les vitres pour une visibilité parfaite.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pourquoi Nous Choisir</h2>
+                <p>Les avantages qui font la différence</p>
+            </div>
+            <div class="why-us-grid">
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Service à Domicile</h3>
+                    <p>Nous venons directement chez vous, économisez votre temps précieux.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Produits Écologiques</h3>
+                    <p>Utilisation exclusive de produits respectueux de l'environnement.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Rapidité</h3>
+                    <p>Service rapide et efficace, intervention en moins de 2 heures.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Garantie Qualité</h3>
+                    <p>Satisfaction garantie ou service refait gratuitement.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Équipe Professionnelle</h3>
+                    <p>Personnel formé et expérimenté pour un service de qualité.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <h3>Prix Compétitifs</h3>
+                    <p>Tarifs attractifs et transparents, sans surprise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicles Section -->
+    <section class="section vehicles" id="vehicles">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos Services de Lavage</h2>
+                <p>Sélectionnez votre type de véhicule pour voir nos packs disponibles</p>
+            </div>
+
+            <!-- Vehicle Type Selection -->
+            <div class="vehicle-selection">
+                <div class="vehicle-option active" data-vehicle="citadine">
+                    <i class="fas fa-car"></i>
+                    <span>Citadine</span>
+                </div>
+                <div class="vehicle-option" data-vehicle="berline">
+                    <i class="fas fa-car-side"></i>
+                    <span>Berline</span>
+                </div>
+                <div class="vehicle-option" data-vehicle="suv">
+                    <i class="fas fa-truck-pickup"></i>
+                    <span>SUV</span>
+                </div>
+                <div class="vehicle-option" data-vehicle="moto">
+                    <i class="fas fa-motorcycle"></i>
+                    <span>Moto</span>
+                </div>
+            </div>
+
+            <!-- Single Packs Container (will be dynamically filled) -->
+            <div class="packs-container" id="packs-container">
+                <!-- Pack cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comment Ça Marche</h2>
+                <p>Un processus simple en 4 étapes</p>
+            </div>
+            <div class="how-it-works-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Réservez en Ligne</h3>
+                    <p>Sélectionnez votre service et réservez votre créneau en quelques clics.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Confirmation</h3>
+                    <p>Recevez une confirmation avec l'heure d'arrivée de notre équipe.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Service à Domicile</h3>
+                    <p>Nos professionnels arrivent chez vous avec tout l'équipement nécessaire.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Voiture Impeccable</h3>
+                    <p>Profitez de votre véhicule propre et étincelant sans avoir bougé de chez vous.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Galerie Avant/Après</h2>
+                <p>Découvrez la transformation de vos véhicules</p>
+            </div>
+            <div class="gallery-slider">
+                <div class="gallery-track" id="galleryTrack">
+                    <div class="gallery-slide">
+                        <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800&h=400&fit=crop" alt="Before/After 1">
+                        <div class="gallery-overlay">
+                            <h3 style="color: white; font-size: 2rem;">Avant / Après</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop" alt="Before/After 2">
+                        <div class="gallery-overlay">
+                            <h3 style="color: white; font-size: 2rem;">Transformation Complète</h3>
+                        </div>
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="https://images.unsplash.com/photo-1486326658981-ed68abe5868e?w=800&h=400&fit=crop" alt="Before/After 3">
+                        <div class="gallery-overlay">
+                            <h3 style="color: white; font-size: 2rem;">Résultat Professionnel</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-controls">
+                <button class="gallery-btn" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-btn" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Témoignages Clients</h2>
+                <p>Ce que disent nos clients satisfaits</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Service exceptionnel ! Mon véhicule n'a jamais été aussi propre. L'équipe est arrivée à l'heure et a fait du travail remarquable.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AM</div>
+                        <div class="author-info">
+                            <h4>Ahmed Mansouri</h4>
+                            <p>Casablanca</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Très pratique ! Plus besoin de perdre du temps dans les stations de lavage. Le service à domicile est parfait pour mon emploi du temps chargé.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">FZ</div>
+                        <div class="author-info">
+                            <h4>Fatima Zahra</h4>
+                            <p>Rabat</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Équipe professionnelle et produits de qualité. Je recommande vivement D.WASH pour tous vos besoins de nettoyage automobile.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">YB</div>
+                        <div class="author-info">
+                            <h4>Youssef Bennani</h4>
+                            <p>Marrakech</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Questions Fréquentes</h2>
+                <p>Trouvez les réponses à vos questions</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Dans quelles villes intervenez-vous ?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous intervenons actuellement dans les principales villes du Maroc : Casablanca, Rabat, Marrakech, Fès, Tanger et leurs environs. Contactez-nous pour vérifier la disponibilité dans votre zone.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Combien de temps dure un lavage complet ?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Un lavage complet prend généralement entre 1h et 2h selon le pack choisi et l'état du véhicule. Le pack Essential prend environ 1h, le Premium 1h30 et le Luxe jusqu'à 2h.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Utilisez-vous vos propres produits et équipements ?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, nous apportons tous nos produits professionnels écologiques et notre équipement. Nous avons seulement besoin d'un accès à l'eau et à l'électricité.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Puis-je annuler ou reporter mon rendez-vous ?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez annuler ou reporter votre rendez-vous jusqu'à 2h avant l'heure prévue sans frais. Au-delà, des frais d'annulation peuvent s'appliquer.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quels modes de paiement acceptez-vous ?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les paiements en espèces, par carte bancaire, virement bancaire et paiement mobile (Orange Money, Inwi Money, etc.).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contactez-Nous</h2>
+                <p>Nous sommes là pour répondre à toutes vos questions</p>
+            </div>
+            
+            <div class="contact-grid">
+                <!-- Contact Info Card -->
+                <div class="contact-info">
+                    <h3 class="contact-info-title">Informations de Contact</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Téléphone</h4>
+                            <p><a href="tel:+2126XXXXXXXX">+212 6XX XX XX XX</a></p>
+                            <p class="contact-subtext">Appel direct en un clic</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:contact@dwash.ma">contact@dwash.ma</a></p>
+                            <p class="contact-subtext">Réponse sous 24h</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Zone de Service</h4>
+                            <p>Casablanca et environs</p>
+                            <p class="contact-subtext">Service à domicile disponible</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Horaires</h4>
+                            <p>Lun-Dim: 8h00 - 20h00</p>
+                            <p class="contact-subtext">7j/7 sans interruption</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Map Container -->
+                <div class="map-wrapper">
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212270.0341439106!2d-7.667914424358772!3d33.57240325526779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd4778aa113b%3A0xb06c1d84f310fd3!2sCasablanca%2C%20Morocco!5e0!3m2!1sen!2sma!4v1620000000000!5m2!1sen!2sma"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="map-overlay">
+                        <i class="fas fa-car"></i>
+                        <p>Nous couvrons toute la région du Grand Casablanca</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">D.WASH</div>
+                    <p class="footer-description">
+                        Service professionnel de lavage mobile à domicile. 
+                        Nous redonnons à votre véhicule tout son éclat sans que vous ayez à bouger de chez vous.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens Rapides</h4>
+                    <ul>
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#vehicles">Véhicules</a></li>
+                        <li><a href="#gallery">Galerie</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>+212 6XX XX XX XX</li>
+                        <li>contact@dwash.ma</li>
+                        <li>Casablanca, Maroc</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 D.WASH. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reservation Modal -->
+    <div class="modal" id="reservationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Réservation en Ligne</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="steps-container">
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <div class="step-indicator active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Véhicule</div>
+                    </div>
+                    <div class="step-indicator" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Date/Heure</div>
+                    </div>
+                    <div class="step-indicator" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Adresse</div>
+                    </div>
+                    <div class="step-indicator" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Confirmation</div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Vehicle Selection -->
+                <div class="step-content active" id="step-1">
+                    <h3 class="step-title">Sélectionnez votre véhicule</h3>
+                    <div class="form-group">
+                        <label>Type de véhicule</label>
+                        <select class="form-control" id="vehicleType" required>
+                            <option value="">Choisissez votre véhicule</option>
+                            <option value="citadine">Citadine</option>
+                            <option value="berline">Berline</option>
+                            <option value="suv-moyen">SUV Moyen</option>
+                            <option value="grand-suv">Grand SUV</option>
+                            <option value="moto">Moto</option>
+                        </select>
+                        <div class="error-message" id="vehicleTypeError"></div>
+                    </div>
+                    <div class="form-group" id="packSelection" style="display: none;">
+                        <label>Pack de service</label>
+                        <select class="form-control" id="servicePack" required>
+                            <option value="">Choisissez un pack</option>
+                        </select>
+                        <div class="error-message" id="servicePackError"></div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Service Details -->
+                <div class="step-content" id="step-2">
+                    <h3 class="step-title">Détails du service</h3>
+                    <div class="form-group">
+                        <label>Date souhaitée</label>
+                        <input type="date" class="form-control" id="serviceDate" required>
+                        <div class="error-message" id="serviceDateError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Heure souhaitée</label>
+                        <select class="form-control" id="serviceTime" required>
+                            <option value="">Sélectionnez l'heure</option>
+                            <option value="08:00">08:00</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+                        <div class="error-message" id="serviceTimeError"></div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Address -->
+                <div class="step-content" id="step-3">
+                    <h3 class="step-title">Adresse</h3>
+                    <div class="form-group">
+                        <label>Ville</label>
+                        <select class="form-control" id="city" required>
+                            <option value="">Sélectionnez votre ville</option>
+                            <option value="casablanca">Casablanca</option>
+                            <option value="rabat">Rabat</option>
+                            <option value="marrakech">Marrakech</option>
+                            <option value="fes">Fès</option>
+                            <option value="tanger">Tanger</option>
+                        </select>
+                        <div class="error-message" id="cityError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Quartier</label>
+                        <input type="text" class="form-control" id="neighborhood" placeholder="Votre quartier" required>
+                        <div class="error-message" id="neighborhoodError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse complète</label>
+                        <textarea class="form-control" id="fullAddress" rows="3" placeholder="Adresse détaillée avec repères" required></textarea>
+                        <div class="error-message" id="fullAddressError"></div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Contact Info -->
+                <div class="step-content" id="step-4">
+                    <h3 class="step-title">Informations de contact</h3>
+                    <div class="form-group">
+                        <label>Nom complet</label>
+                        <input type="text" class="form-control" id="fullName" placeholder="Votre nom complet" required>
+                        <div class="error-message" id="fullNameError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Votre numéro de téléphone" required>
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email (optionnel)</label>
+                        <input type="email" class="form-control" id="email" placeholder="Votre adresse email">
+                    </div>
+                    <div class="form-group">
+                        <label>Notes spéciales (optionnel)</label>
+                        <textarea class="form-control" id="notes" rows="3" placeholder="Instructions particulières..."></textarea>
+                    </div>
+                    
+                    <!-- Enhanced Reservation Summary -->
+                    <div class="receipt-summary">
+                        <div class="receipt-header">
+                            <div class="receipt-logo">
+                                <i class="fas fa-car-wash"></i>
+                                <span>D.WASH</span>
+                            </div>
+                            <div class="receipt-title">Récapitulatif</div>
+                            <div class="receipt-number">#<span id="receiptNumber">20250826</span></div>
+                        </div>
+                        
+                        <div class="receipt-body">
+                            <div class="receipt-row">
+                                <span class="receipt-label">Véhicule:</span>
+                                <span class="receipt-value" id="summaryVehicle">Berline</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span class="receipt-label">Pack:</span>
+                                <span class="receipt-value" id="summaryPack">Extra</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span class="receipt-label">Date & Heure:</span>
+                                <span class="receipt-value" id="summaryDateTime">26/08/2025 à 10:00</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span class="receipt-label">Lieu:</span>
+                                <span class="receipt-value" id="summaryLocation">Casablanca</span>
+                            </div>
+                            
+                            <div class="receipt-divider">
+                                <span>Services inclus</span>
+                            </div>
+                            
+                            <ul class="receipt-services" id="summaryServices">
+                                <li>Traitement taches Sièges/Tapis</li>
+                                <li>Lavage Carrosserie</li>
+                                <li>Aspiration complète</li>
+                                <li>Rénovation Plastique</li>
+                                <li>Nettoyage Vitres</li>
+                                <li>Décroissance Jantes</li>
+                                <li>Cirage Pneus</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="receipt-total">
+                            <span>Total à Payer</span>
+                            <span class="receipt-amount" id="summaryTotal">250 DH</span>
+                        </div>
+                        
+                        <div class="receipt-notice">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Merci pour votre confiance. Présentez ce code à notre équipe.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="step-buttons">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">
+                        <i class="fas fa-arrow-left"></i> Précédent
+                    </button>
+                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">
+                        Suivant <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button type="button" class="btn btn-confirm" id="submitBtn" onclick="submitReservation()" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Confirmer la Réservation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // When setting up vehicle card event listeners
+        document.querySelectorAll('.vehicle-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const vehicleType = this.dataset.vehicleType;
+                updatePacksDisplay(vehicleType, this); // Pass the clicked card element
+            });
+        });
+    </script>
+
+    <script>
+        // Global variables
+        let currentStep = 1;
+        let currentSlide = 0;
+        const totalSlides = 3;
+        let selectedVehicleType = 'citadine'; // Default selection
+
+        // Complete Vehicle packs data with all vehicle types
+        const vehiclePacks = {
+            citadine: [
+                { 
+                    name: 'Lavage Complet', 
+                    price: 70, 
+                    features: [
+                        'Lavage Carrosserie',
+                        'Nettoyage Intérieurs',
+                        'Aspiration Habitacle/Coffre',
+                        'Nettoyage Vitres',
+                        'Nettoyage Jantes',
+                        'Cirage Pneus'
+                    ] 
+                },
+                { 
+                    name: 'Special', 
+                    price: 90, 
+                    features: [
+                        'Lavage/Décontamination Carrosserie',
+                        'Aspiration Habitacle/Coffre',
+                        'Nettoyage Intérieurs',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ],
+                    popular: true
+                },
+                { 
+                    name: 'Extra', 
+                    price: 200, 
+                    features: [
+                        'Traitement taches Sièges/Tapis',
+                        'Lavage Carrosserie',
+                        'Aspiration Habitacle/Coffre',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ] 
+                },
+                { 
+                    name: 'Premium', 
+                    price: 300, 
+                    features: [
+                        'Traitement taches Sièges/Tapis',
+                        'Traitement taches toit',
+                        'Waxing Carrosserie',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ] 
+                }
+            ],
+            berline: [
+                { 
+                    name: 'Lavage Complet', 
+                    price: 100, 
+                    features: [
+                        'Lavage Carrosserie',
+                        'Nettoyage Intérieurs',
+                        'Aspiration Habitacle/Coffre',
+                        'Nettoyage Vitres',
+                        'Nettoyage Jantes',
+                        'Cirage Pneus'
+                    ] 
+                },
+                { 
+                    name: 'Special', 
+                    price: 130, 
+                    features: [
+                        'Lavage/Décontamination Carrosserie',
+                        'Aspiration complète',
+                        'Nettoyage Intérieurs',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ],
+                    popular: true
+                },
+                { 
+                    name: 'Extra', 
+                    price: 250, 
+                    features: [
+                        'Traitement taches Sièges/Tapis',
+                        'Lavage Carrosserie',
+                        'Aspiration complète',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ] 
+                },
+                { 
+                    name: 'Premium', 
+                    price: 350, 
+                    features: [
+                        'Traitement taches complètes',
+                        'Traitement taches toit',
+                        'Waxing Carrosserie',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ] 
+                }
+            ],
+            suv: [
+                { 
+                    name: 'Lavage Complet', 
+                    price: 120, 
+                    features: [
+                        'Lavage Carrosserie',
+                        'Nettoyage Intérieurs',
+                        'Aspiration Habitacle/Coffre',
+                        'Nettoyage Vitres',
+                        'Nettoyage Jantes',
+                        'Cirage Pneus'
+                    ] 
+                },
+                { 
+                    name: 'Special', 
+                    price: 160, 
+                    features: [
+                        'Lavage/Décontamination Carrosserie',
+                        'Aspiration complète',
+                        'Nettoyage Intérieurs',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ],
+                    popular: true
+                },
+                { 
+                    name: 'Extra', 
+                    price: 280, 
+                    features: [
+                        'Traitement taches Sièges/Tapis',
+                        'Lavage Carrosserie',
+                        'Aspiration complète',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ] 
+                },
+                { 
+                    name: 'Premium', 
+                    price: 400, 
+                    features: [
+                        'Traitement taches complètes',
+                        'Traitement taches toit',
+                        'Waxing Carrosserie',
+                        'Rénovation Plastique',
+                        'Nettoyage Vitres',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ] 
+                }
+            ],
+            moto: [
+                { 
+                    name: 'Lavage Complet', 
+                    price: 50, 
+                    features: [
+                        'Lavage Carrosserie',
+                        'Nettoyage Plastiques',
+                        'Nettoyage Jantes',
+                        'Cirage Pneus'
+                    ] 
+                },
+                { 
+                    name: 'Special', 
+                    price: 80, 
+                    features: [
+                        'Lavage/Décontamination',
+                        'Nettoyage complet',
+                        'Rénovation Plastique',
+                        'Décroissance Jantes',
+                        'Cirage Pneus'
+                    ],
+                    popular: true
+                },
+                // { 
+                //     name: 'Extra', 
+                //     price: 120, 
+                //     features: [
+                //         'Traitement taches Sièges',
+                //         'Lavage complet',
+                //         'Rénovation Plastique',
+                //         'Décroissance Jantes',
+                //         'Cirage Pneus'
+                //     ] 
+                // },
+                // { 
+                //     name: 'Premium', 
+                //     price: 180, 
+                //     features: [
+                //         'Traitement taches complètes',
+                //         'Waxing Carrosserie',
+                //         'Rénovation Plastique',
+                //         'Décroissance Jantes',
+                //         'Cirage Pneus'
+                //     ] 
+                // }
+            ]
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize vehicle selection
+            setupVehicleSelection();
+            
+            // Initialize first pack display
+            updatePacksDisplay(selectedVehicleType);
+            
+            // Other initializations...
+            setupNavbarScroll();
+            setupGallery();
+            setupFAQ();
+            setupModal();
+            setupFormValidation();
+        });
+
+        // Vehicle selection functions
+        function setupVehicleSelection() {
+            const vehicleOptions = document.querySelectorAll('.vehicle-option');
+            
+            vehicleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    console.log('Vehicle option clicked:', this.getAttribute('data-vehicle'));
+                    // Remove active class from all options
+                    vehicleOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Get selected vehicle type
+                    selectedVehicleType = this.getAttribute('data-vehicle');
+                    
+                    // Update packs display
+                    updatePacksDisplay(selectedVehicleType);
+                });
+            });
+        }
+
+        function updatePacksDisplay(vehicleType, clickedCard) {
+            const packsContainer = document.getElementById('packs-container');
+            const packs = vehiclePacks[vehicleType];
+            
+            // Clear existing packs with fade out animation
+            packsContainer.style.opacity = '0';
+            packsContainer.style.transition = 'opacity 0.3s ease';
+            
+            // Default animation direction (center)
+            let direction = 'right';
+            
+            // Only try to get position if clickedCard exists
+            if (clickedCard) {
+                const cardRect = clickedCard.getBoundingClientRect();
+                const screenCenter = window.innerWidth / 2;
+                direction = cardRect.left < screenCenter ? 'right' : 'left';
+            }
+            
+            setTimeout(() => {
+                // Clear existing content
+                packsContainer.innerHTML = '';
+                packsContainer.style.opacity = '1';
+                
+                // Create pack grid container with initial animation state
+                const packsGrid = document.createElement('div');
+                packsGrid.className = 'packs-grid';
+                packsGrid.style.transform = direction === 'right' 
+                    ? 'translateX(100px)' 
+                    : 'translateX(-100px)';
+                packsGrid.style.opacity = '0';
+                packsGrid.style.transition = 'all 0.5s ease-out';
+                
+                // Create pack cards
+                packs.forEach((pack, index) => {
+                    const packCard = document.createElement('div');
+                    packCard.className = `pack-card ${pack.popular ? 'popular' : ''}`;
+                    packCard.innerHTML = `
+                        <div class="pack-header">
+                            <h3>${pack.name}</h3>
+                            <p>Intérieur + Extérieur</p>
+                        </div>
+                        <div class="pack-price">${pack.price} <span id='dh_mad'>Dh</span></div>
+                        <ul class="pack-features">
+                            ${pack.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                        <button class="pack-button" onclick="selectPack('${vehicleType}', ${index})">Réserver</button>
+                    `;
+                    
+                    // Individual card animations
+                    packCard.style.transitionDelay = `${index * 0.1}s`;
+                    packCard.style.transform = 'translateY(20px)';
+                    packCard.style.opacity = '0';
+                    
+                    packsGrid.appendChild(packCard);
+                });
+                
+                packsContainer.appendChild(packsGrid);
+                packsContainer.style.display = 'block';
+                
+                // Trigger animations
+                setTimeout(() => {
+                    packsGrid.style.transform = 'translateX(0)';
+                    packsGrid.style.opacity = '1';
+                    
+                    // Animate individual cards
+                    const cards = packsGrid.querySelectorAll('.pack-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.transform = 'translateY(0)';
+                            card.style.opacity = '1';
+                        }, index * 100);
+                    });
+                }, 50);
+            }, 300);
+        }
+
+        function selectPack(vehicleType, packIndex) {
+            // Set the selected pack in the reservation form
+            document.getElementById('vehicleType').value = vehicleType;
+            
+            // Update the pack dropdown
+            const servicePack = document.getElementById('servicePack');
+            servicePack.innerHTML = '';
+            
+            const packs = vehiclePacks[vehicleType];
+            packs.forEach((pack, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${pack.name} - ${pack.price} DH`;
+                if (index === packIndex) {
+                    option.selected = true;
+                }
+                servicePack.appendChild(option);
+            });
+            
+            // Show the pack selection
+            document.getElementById('packSelection').style.display = 'block';
+            
+            // Open the reservation modal
+            openModal();
+        }
+
+        // Navbar scroll effect
+        function setupNavbarScroll() {
+            window.addEventListener('scroll', function() {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Gallery functions
+        function setupGallery() {
+            updateGallery();
+            setInterval(nextSlide, 5000);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateGallery();
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateGallery();
+        }
+
+        function updateGallery() {
+            const track = document.getElementById('galleryTrack');
+            const translateX = -currentSlide * 100;
+            track.style.transform = `translateX(${translateX}%)`;
+        }
+
+        // FAQ functions
+        function setupFAQ() {
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    toggleFAQ(this);
+                    console.log('clicked');
+                });
+            });
+        }
+
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+
+            if (faqItem.classList.contains('active')) {
+                faqItem.classList.remove('active');
+                answer.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                    item.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+                });
+
+                // Open clicked FAQ item
+                faqItem.classList.add('active');
+                answer.classList.add('active');
+                icon.style.transform = 'rotate(45deg)';
+            }
+        }
+
+        // Modal functions
+        function setupModal() {
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('reservationModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('serviceDate').setAttribute('min', today);
+        }
+
+        function openModal() {
+            document.getElementById('reservationModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset to first step
+            currentStep = 1;
+            updateStepDisplay();
+        }
+
+        function closeModal() {
+            document.getElementById('reservationModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Reservation steps
+        function changeStep(direction) {
+            if (direction === 1 && !validateCurrentStep()) {
+                return;
+            }
+
+            // Hide current step
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            
+            // Update step indicators
+            document.querySelector(`.step-indicator[data-step="${currentStep}"]`).classList.remove('active');
+            if (direction === -1) {
+                document.querySelector(`.step-indicator[data-step="${currentStep}"]`).classList.remove('completed');
+            }
+
+            // Update current step
+            direction === 1 ? currentStep++ : currentStep--;
+            
+            // Show new step
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            document.querySelector(`.step-indicator[data-step="${currentStep}"]`).classList.add('active');
+            if (direction === 1 && currentStep < 4) {
+                document.querySelector(`.step-indicator[data-step="${currentStep}"]`).classList.add('completed');
+            }
+
+            // Update progress bar
+            updateProgressBar();
+            
+            // Update button visibility
+            updateStepDisplay();
+            
+            // Update summary if on last step
+            if (currentStep === 4) {
+                updateReservationSummary();
+            }
+        }
+
+        function updateProgressBar() {
+            const progressPercentage = ((currentStep - 1) / 3) * 100;
+            document.querySelector('.progress-bar::before').style.width = `${progressPercentage}%`;
+        }
+
+        function updateStepDisplay() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            prevBtn.style.display = currentStep === 1 ? 'none' : 'inline-block';
+            nextBtn.style.display = currentStep === 4 ? 'none' : 'inline-block';
+            submitBtn.style.display = currentStep === 4 ? 'inline-block' : 'none';
+        }
+
+        // Form validation
+        function setupFormValidation() {
+            document.getElementById('vehicleType').addEventListener('change', function() {
+                const vehicleType = this.value;
+                const packSelection = document.getElementById('packSelection');
+                const servicePack = document.getElementById('servicePack');
+
+                if (vehicleType) {
+                    packSelection.style.display = 'block';
+                    servicePack.innerHTML = '<option value="">Choisissez un pack</option>';
+                    
+                    const packs = vehiclePacks[vehicleType];
+                    packs.forEach((pack, index) => {
+                        servicePack.innerHTML += `<option value="${index}">${pack.name} - ${pack.price} DH</option>`;
+                    });
+                } else {
+                    packSelection.style.display = 'none';
+                }
+            });
+        }
+
+        function validateCurrentStep() {
+            let isValid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+            
+            switch (currentStep) {
+                case 1:
+                    const vehicleType = document.getElementById('vehicleType');
+                    const servicePack = document.getElementById('servicePack');
+                    
+                    if (!vehicleType.value) {
+                        document.getElementById('vehicleTypeError').textContent = 'Veuillez sélectionner un type de véhicule';
+                        document.getElementById('vehicleTypeError').style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    if (!servicePack.value) {
+                        document.getElementById('servicePackError').textContent = 'Veuillez sélectionner un pack de service';
+                        document.getElementById('servicePackError').style.display = 'block';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 2:
+                    const serviceDate = document.getElementById('serviceDate');
+                    const serviceTime = document.getElementById('serviceTime');
+                    
+                    if (!serviceDate.value) {
+                        document.getElementById('serviceDateError').textContent = 'Veuillez sélectionner une date';
+                        document.getElementById('serviceDateError').style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    if (!serviceTime.value) {
+                        document.getElementById('serviceTimeError').textContent = 'Veuillez sélectionner une heure';
+                        document.getElementById('serviceTimeError').style.display = 'block';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 3:
+                    const city = document.getElementById('city');
+                    const neighborhood = document.getElementById('neighborhood');
+                    const fullAddress = document.getElementById('fullAddress');
+                    
+                    if (!city.value) {
+                        document.getElementById('cityError').textContent = 'Veuillez sélectionner votre ville';
+                        document.getElementById('cityError').style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    if (!neighborhood.value) {
+                        document.getElementById('neighborhoodError').textContent = 'Veuillez entrer votre quartier';
+                        document.getElementById('neighborhoodError').style.display = 'block';
+                        isValid = false;
+                    }
+                    
+                    if (!fullAddress.value) {
+                        document.getElementById('fullAddressError').textContent = 'Veuillez entrer votre adresse complète';
+                        document.getElementById('fullAddressError').style.display = 'block';
+                        isValid = false;
+                    }
+                    break;
+            }
+            
+            return isValid;
+        }
+
+        function updateReservationSummary() {
+            const vehicleType = document.getElementById('vehicleType').value;
+            const packIndex = document.getElementById('servicePack').value;
+            const serviceDate = document.getElementById('serviceDate').value;
+            const serviceTime = document.getElementById('serviceTime').value;
+            const city = document.getElementById('city').value;
+
+            if (vehicleType && packIndex !== '') {
+                const pack = vehiclePacks[vehicleType][packIndex];
+                const vehicleNames = {
+                    'citadine': 'Citadine',
+                    'berline': 'Berline',
+                    'suv': 'SUV',
+                    'moto': 'Moto'
+                };
+
+                // Format date as DD/MM/YYYY
+                const formattedDate = serviceDate.split('-').reverse().join('/');
+                
+                // Update summary
+                document.getElementById('summaryVehicle').textContent = vehicleNames[vehicleType];
+                document.getElementById('summaryPack').textContent = pack.name;
+                document.getElementById('summaryDateTime').textContent = `${formattedDate} à ${serviceTime}`;
+                document.getElementById('summaryLocation').textContent = city;
+                document.getElementById('summaryTotal').textContent = `${pack.price} DH`;
+                
+                // Update services list
+                const servicesList = document.getElementById('summaryServices');
+                servicesList.innerHTML = pack.features.map(feature => `<li>${feature}</li>`).join('');
+                
+                // Generate receipt number (DW-YYYYMMDD)
+                const receiptNumber = serviceDate.replace(/-/g, '');
+                document.getElementById('receiptNumber').textContent = receiptNumber;
+            }
+        }
+
+        function submitReservation() {
+            if (!validateCurrentStep()) {
+                return;
+            }
+
+            const fullName = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!fullName || !phone) {
+                alert('Veuillez remplir au moins votre nom et téléphone.');
+                return;
+            }
+
+            // Here you would normally send the data to your server
+            alert('Réservation confirmée ! Nous vous contacterons bientôt pour confirmer votre rendez-vous.');
+            closeModal();
+
+            // Reset form
+            currentStep = 1;
+            document.querySelectorAll('.step-content').forEach(step => step.classList.remove('active'));
+            document.querySelectorAll('.step-nav-item').forEach(nav => {
+                nav.classList.remove('active', 'completed');
+            });
+            document.getElementById('step-1').classList.add('active');
+            document.getElementById('step-nav-1').classList.add('active');
+            updateStepDisplay();
+            
+            // Reset form fields
+            document.querySelectorAll('.form-control').forEach(field => {
+                field.value = '';
+            });
+            document.getElementById('packSelection').style.display = 'none';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.vehicle-option, .pack-card, .step-card, .testimonial-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('reservationModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
